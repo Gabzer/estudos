@@ -121,3 +121,23 @@ eh possivel criar um arquivo application-dev.properties e colocar as configuraco
 ## O que eh Bean no SpringBoot ?
 ## O que eh Spring ?
 
+
+# Criacao de microservices Spring Boot
+
+https://github.com/Gabzer/creating-spring-boot-microservices-3839084
+
+Core Spring Framework - open-source que providencia a injecao de dependencias do Spring Beans, o que ocorre pelo contexto do app. Esse contexto segue o modelo do conceito de inversao do controle (inversion-of-control design pattern).
+
+O que eh a injecao de dependencias (ou DI) ? Ela separa a utilisacao de objetos da dependencia. A criacao de dependencias eh gerenciada fora da classe, o que a faz mais flexivel, mais sustetavel e mais facil de TU.
+
+Inversion-of-Control Framework (IOC) - mantem o ciclo de vida de um objeto e necessita uma injecao de dependencias. A classe abandona o controle, de onde a inversao do controle para o framework.
+
+Spring Application Context (Spring Container) - eh o framework IOC do Spring
+
+Spring Bean - eh um objeto Java gerenciado pelo Spring Container. O Scope default = singleton (mas existem outros: prototype, request, session, etc).
+
+Como config nossa DI ? Coloca-las diretamente no code Java = Anotations.
+
+Spring Modules: spring.io/projects - Spring Framework, Spring Boot, Spring Data, Spring MVC, Spring Cloud e etc.
+
+@Repository - que fica sobre uma classe - faz um Autowired de uma classe nas outras que dependem dela (normalmente elas estao anotadas com @Service)
