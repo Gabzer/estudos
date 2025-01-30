@@ -24,16 +24,30 @@ src/main/java/{app_dominio}/{nome_app}Application.java - classe principal/de ent
 
 o SpringBoot utilisa muito das anotacoes (nome em cima da classe que comeca com @) para fazer configuracoes das nossas classes (Design Patterns).
 
-classe do tipo Controller: recebe as requisicoes http (arqs colocados normalmente em src/main/java/{app_dominio}/controller).
-
 Api STATEFULL -> o estado do cliente é mantido no servidor.
 
 Api STATELESS -> a cada requisicao eu recebo todas as informacoes que eu preciso para fazer aquela funcionalidade que o cliente estah pedindo.
+
+criando uma instancia: pode ser pelo construtor mas o SpringBoot recomenda usar o @Autowired (injecao de dependencia).
+
+```java
+@Autowired
+private HelloWorldService helloWorldService;
+```
+
+Classe de tipo Controller: recebe as requisicoes http (arqs colocados normalmente em src/main/java/{app_dominio}/controller).
+
+Classe de tipo Service: onde colocamos a logica de negocio da app.
+
+Classe de tipo Configuration: definem Beans e instancias de classe no contexto da app. O Spring pode entao injetar classes de bibliotecas externas a ele.
+Deve-se utilizar o @Bean sobre o metodo para indicar ao Spring que ele deve gerencia-lo como um Bean.
 
 
 ## Anotacoes
 
 @SpringBootApplication - define a porta de entrada da app (resumo de @Configuration, @EnableAutoConfiguration e @ComponentScan)
+
+@Profile() - define o perfil de configuracao da app. Tem que ser posta embaixo da anotacao @SpringBootApplication. Pode ser usada para definir o perfil de configuracao da app (dev, prod, test - entre parenteses na anotacao).
 
 @RestController - controller do tipo Rest (stateless) (resume @Controller e @ResponseBody).
 
@@ -41,8 +55,69 @@ Api STATELESS -> a cada requisicao eu recebo todas as informacoes que eu preciso
 
 @GetMapping - tal metodo escuta as requisicoes GET. Podemos ajuntar mais path, soh colocar parenteses ("/get").
 
+@PostMapping() - tal metodo escuta as requisicoes POST.
 
-## O que e Bean no SpringBoot ?
-## O que e Spring ?
+@PathVariable("") - pega uma info que vem na URL.
 
-25:35
+@RequestParam() - 
+```java
+@PostMapping("/{id}")
+public String helloWorldPost(@PathVariable String id, @RequestParam(value = "filter", defaultValue = "nenhum") String filter, @RequestBody User body) {
+    return "Hello World " + filter + " " + id;
+}
+```
+
+@RequestBody - indica que o parametro do metodo eh o corpo(body de um Post) da requisicao.
+
+@Service - classe de tipo Service.
+
+@Autowired - injecao de dependencia (criacao de uma instancia).
+
+@Bean - define um Bean (instancia de uma classe) no contexto da app.
+
+
+## Lombok Anotations
+
+@Getter - cria os metodos get.
+
+@Setter - cria os metodos set.
+
+@AllArgsContructor - cria um construtor com todos os parametros.
+
+
+## Configuracoes
+
+No application.properties:
+
+config da port:
+
+```
+server.port=8080
+```
+
+config do BD:
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/first_spring_app
+spring.datasource.username=root
+spring.datasource.password=root
+```
+
+usando variaveis de ambiente (os : entre a var_ambiente e o valor padrao):
+
+```
+spring.datasource.url=${DB_HOST:jdbc:mysql://localhost:3306/first_spring_app}
+```
+
+perfil de configuracao:
+
+```
+spring.profiles.active=${ACTIVE_PROFILE:dev}
+```
+
+eh possivel criar um arquivo application-dev.properties e colocar as configuracoes especificas para o perfil dev.
+
+
+## O que eh Bean no SpringBoot ?
+## O que eh Spring ?
+
