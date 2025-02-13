@@ -5,9 +5,13 @@ Spring Boot est un framework que facilita a criacao de projetos Java baseados no
 Sem configuracoes - JUSTE RUN: so iniciar o projeto e ja roda-lo.
 
 
-## SpringInitializr
+## Spring Initializr
 
-www.start.spring.io - para criar rapidamente um projeto
+start.spring.io - para criar rapidamente um projeto
+
+Sabendo que mesmo com Maven ou Gradle nohs encontramos com problemas de compatibilidade de versoes, o Spring Initializr eh uma ferramenta que nos ajuda a criar um projeto Spring Boot com as dependencias certas.
+
+Esse site cria a estrutura dos packages e tbm o pom.xml/build.gradle.
 
 
 ## Compreendendo um projeto SpringBoot
@@ -141,3 +145,20 @@ Como config nossa DI ? Coloca-las diretamente no code Java = Anotations.
 Spring Modules: spring.io/projects - Spring Framework, Spring Boot, Spring Data, Spring MVC, Spring Cloud e etc.
 
 @Repository - que fica sobre uma classe - faz um Autowired de uma classe nas outras que dependem dela (normalmente elas estao anotadas com @Service)
+
+## Web Application for Relational DB
+
+- Required dependencies:
+    1. Spring Web, wich includes Tomcat and Spring MVC;
+    2. Rest Repositories to expose Spring Data repositories over REST;
+    3. Java Persistence API;
+    4. Lombok: generates getter/setter/logger bytecode;
+    5. H2 in-memory database driver.
+
+Por ter na classe principal o metodo main, nohs temos o controle sobre tudo. E o servidor de aplicacao estara dentro de nossa aplicacao.
+
+Actuator denpendency - para monitorar a app (bilan de santé).
+
+Jakarta Persistence Layer (Java Persistence API) - para mapear os objetos relacionais.
+
+Spring Data JPA
